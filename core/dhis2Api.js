@@ -47,6 +47,12 @@ Dhis2Api.factory("userAuthorization", ['$resource','commonvariable',function($re
 		{ get: { method: "GET", transformResponse: function (response) {return {status: response};}	}});
 
 }]);
+Dhis2Api.factory("Credential",['$resource','commonvariable', function ($resource,commonvariable) {
+	return $resource( commonvariable.url+"me", 
+	{fields:'userCredentials[name,code,openId]'},
+  { get: { method: "GET"}
+  });
+}]);
 
 Dhis2Api.factory("Entity",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"trackedEntityInstances", 
