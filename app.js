@@ -6,12 +6,8 @@ appContractSDSC.config(function($routeProvider) {
 		    templateUrl: "modules/supervision/supervisionView.html",
 		    controller: "supervisionController"
 		  });
-	  $routeProvider.when('/administration', {
-		  	templateUrl: "modules/administrationcontract/administrationcontractView.html",
-		  	controller: "administrationcontractController"
-		  });
-	  $routeProvider.otherwise({
-	        redirectTo: '/administration'
+	   $routeProvider.otherwise({
+	        redirectTo: '/supervision'
 	  });   
 
 	});

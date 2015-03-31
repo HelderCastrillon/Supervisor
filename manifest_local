@@ -1,14 +1,14 @@
 {
 	"version" : "1",
-	"name" : "Contratos",
-	"description" : "Gestión de contratos",
+	"name" : "Supervisión",
+	"description" : "Supervisión de contratos",
 	"launch_path" : "index.html",
 	"installs_allowed_from" : null,
 	"default_locale" : "es",
 	"icons" : {
 		"16" : null,
-		"48" : "img/icons/contract48.png",
-		"128" : "img/icons/contract.png"
+		"48" : "img/icons/supervisor48.png",
+		"128" : "img/icons/supervisor128.png"
 	},
 	"developer" : {
 		"url" : "",
