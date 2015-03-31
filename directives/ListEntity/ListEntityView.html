@@ -1,0 +1,10 @@
+ <div  ng-controller="d2DroplistrentityController">
+ <div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">{{ 'CONTRACT_UPLOAD_ENTITY' | translate }}</span>
+  <input type="text" ng-model="EntitySelected" typeahead-template-url="directives/ListEntity/template.html" placeholder="{{'CONTRACT_UPLOAD_ENTITY_FIND' | translate }}" typeahead="entity[7] as entity for entity in findEntitybyName($viewValue)" typeahead-min-length="1"  typeahead-loading="loadingrefresh" class="form-control" typeahead-on-select="onSelect($item, $model, $label)">
+    <span class="input-group-addon glyphicon glyphicon-search"></span>
+    <i ng-show="loadingrefresh" class="glyphicon glyphicon-refresh"></i>
+</div>
+</div>
+
+

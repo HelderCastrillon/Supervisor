@@ -1,0 +1,200 @@
+<style>
+	.dropdown-menu {
+		width: 100%;
+	}
+
+	.scrollable-menu {
+		height: auto;
+		max-height: 200px;
+		overflow-x: hidden;
+	}
+</style>
+<div class="dropdown" ng-controller="d2DropDownPeriodController">
+	<div class="row">
+
+		<div class="col-md-6">
+			<label> {{ 'PERIOD_TYPE' | translate }}</label><br>
+
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true">
+				{{periodtypename?periodtypename: 'PERIOD_TYPE_SELECT' | translate }}
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownCountry">
+				<li ng-repeat="periodo in tiposperiodo"
+					ng-if="periodo.periodtypeid>=periodDataSetType">
+					<a  ng-click='tipoPeriodoSeleccionado(periodo)'>{{periodo.name}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+
+	<div class="row">
+	<div class="col-md-6" ng-show="'1'==periodtypeid">
+		<label>{{ 'PERIOD_SELECT_DAY' | translate }}</label>
+		<div id="dt">
+			<p class="input-group">
+				<input type="text" class="form-control"
+					   datepicker-popup="{{periodtypeformat}}"
+					   ng-model="day" is-open="opened"
+					   min-date="minDate"
+					   max-date="maxDate"
+					   datepicker-options="{minMode: 'day', showWeeks:'false'}"
+					   datepicker-mode="'day'"
+					   date-disabled="disabled(date, mode)"
+					   ng-required="true"
+					   ng-model-format="yyyMMdd"
+					   ng-change="asignarFecha(day)"
+					   close-text="Close" />
+				<span class="input-group-btn">
+                <button type="button" class="btn btn-default "
+						ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+			</p>
+
+		</div>
+
+	</div>
+		</div>
+
+
+        <div class="row">
+            <div class="col-md-6" ng-show="'3'==periodtypeid">
+				<label>{{ 'PERIOD_SELECT_MONTH' | translate }}</label>
+                <div id="mensual">
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               datepicker-popup="{{periodtypeformat}}"
+                               ng-model="month" is-open="opened"
+                               min-date="minDate"
+                               max-date="maxDate"
+                               datepicker-options="{minMode: 'month'}"
+                               datepicker-mode="'month'"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="true"
+							   ng-change="asignarFecha(month)"
+                               close-text="Close" />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default "
+                            ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+            <div class="row">
+                <div class="col-md-6" ng-show="'5'==periodtypeid">
+                    <label>{{ 'PERIOD_SELECT_YEAR' | translate }}</label>
+                    <div id="anual">
+                        <p class="input-group">
+                            <input type="text" class="form-control"
+                                   datepicker-popup="{{periodtypeformat}}"
+                                   ng-model="year" is-open="opened"
+                                   min-date="minDate"
+                                   max-date="maxDate"
+                                   datepicker-options="{minMode: 'year'}"
+                                   datepicker-mode="'year'"
+                                   date-disabled="disabled(date, mode)"
+                                   ng-required="true"
+								   ng-change="asignarFecha(year)"
+                                   close-text="Close" />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default "
+                                ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+<div class="row">
+	<div class="col-md-6" ng-show="'2'==periodtypeid">
+		<label>{{ 'PERIOD_SELECT_WEEK' | translate }}</label>
+		<div id="ww">
+			<p class="input-group">
+				<input type="text" class="form-control"
+					   datepicker-popup="{{periodtypeformat}}"
+					   ng-model="semana.value" is-open="opened"
+					   min-date="minDate"
+					   max-date="maxDate"
+					   datepicker-options="{minMode: 'day', showWeeks:'false'}"
+					   datepicker-mode="'day'"
+					   date-disabled="disabled(date, mode)"
+					   ng-required="true"
+					   ng-change="asignarFecha(semana.value)"
+					   close-text="Close" />
+				<span class="input-group-btn">
+                <button type="button" class="btn btn-default "
+						ng-click="semanaSeleccionada(semana,$event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+			</p>
+		</div>
+	</div>
+</div>
+
+	<div class="row">
+		<div class="col-md-6" ng-show="'4'==periodtypeid">
+			 <label>{{ 'PERIOD_SELECT_SEMESTRAL' | translate }} </label><br>
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-expanded="true" onscroll="true">
+				{{semestre?semestre: 'PERIOD_SELECT_SEMESTRAL' | translate }}
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownCountry">
+				<li ng-repeat="semestre in semestral">
+					<a  ng-click='semestreSeleccionado(semestre)'>{{semestre}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6" ng-show="'6'==periodtypeid">
+			<label>{{ 'PERIOD_SELECT_FINANCIAL_APRIL' | translate }} </label><br>
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" onscroll="true">
+				{{financialPeriodApril?financialPeriodApril: 'PERIOD_SELECT_FINANCIAL_APRIL' | translate }}
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownCountry">
+				<li ng-repeat="april in financialApril">
+					<a  ng-click='periodoFinanciero(april)'>{{april.description}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6" ng-show="'7'==periodtypeid">
+			<label>{{ 'PERIOD_SELECT_FINANCIAL_JULY' | translate }} </label><br>
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true" onscroll="true">
+				{{financialPeriodJuly?financialPeriodJuly: 'PERIOD_SELECT_FINANCIAL_JULY' | translate}}
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownCountry">
+				<li ng-repeat="july in financialJuly">
+					<a  ng-click='periodoFinanciero(july)'>{{july.description}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6" ng-show="'8'==periodtypeid">
+			<label>{{ 'PERIOD_SELECT_FINANCIAL_OCTOBER' | translate }} </label><br>
+			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="true" onscroll="true">
+				{{financialPeriodOct?financialPeriodOct: 'PERIOD_SELECT_FINANCIAL_OCTOBER' | translate}}
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownCountry">
+				<li ng-repeat="october in financialOct">
+					<a  ng-click='periodoFinanciero(october)'>{{october.description}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+</div>
+
+
+

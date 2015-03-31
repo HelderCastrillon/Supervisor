@@ -1,0 +1,27 @@
+{
+	"version" : "1",
+	"name" : "Contratos",
+	"description" : "Gestión de contratos",
+	"launch_path" : "index.html",
+	"installs_allowed_from" : null,
+	"default_locale" : "es",
+	"icons" : {
+		"16" : null,
+		"48" : "img/icons/contract48.png",
+		"128" : "img/icons/contract.png"
+	},
+	"developer" : {
+		"url" : "",
+		"name" : "Helder Castrillon",
+		"company" : null,
+		"email" : "heldersoft@gmail.com"
+	},
+	"activities" : {
+		"dhis" : {
+			"href" : "http://localhost:8080/dhis"
+		}
+	},
+	"folderName" : null,
+	"baseUrl" : null,
+	"launchUrl" : null
+}
