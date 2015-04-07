@@ -27,6 +27,7 @@ Dhis2Api.factory("commonvariable", function () {
 			TypeEntity:"WkBTuQkUtRM",
 			Program:"kmwWsj13wN0",
 			programStage:"rQFeRuU0y2T",
+			programStageSupervision:"bvCkspOICM2",
 			StartDate:'2015-01-01',
 			EndDate:dtformated,
 			DataElement:{"nContrato":"iIpswT0zho9","fContrato":"QkcfD67ZZhZ","rContrato":"B1UpXqZ48iX","rSupervision":"DUPFn7tCJJn","rEjecucion":"dJLaFwIe1bM"},
@@ -54,44 +55,18 @@ Dhis2Api.factory("Credential",['$resource','commonvariable', function ($resource
   });
 }]);
 
-Dhis2Api.factory("Entity",['$resource','commonvariable', function ($resource,commonvariable) {
-	return $resource( commonvariable.url+"trackedEntityInstances", 
-	{te:'@te',
-	ou:'@ou'},
-  { get: { method: "GET"},
-	post: { method: "POST"},
-	remove: {method:'DELETE'}
+Dhis2Api.factory("Supervisors",['$resource','commonvariable', function ($resource,commonvariable) {
+	return $resource( commonvariable.url+"optionSets/H6K1g3cTydR", 
+	{},
+  { get: { method: "GET"}
   });
 }]);
 
-Dhis2Api.factory("TrackerEntityinProgram",['$resource','commonvariable', function ($resource,commonvariable) {
-	return $resource( commonvariable.url+"trackedEntityInstances", 
-	{te:'@te',
-	ou:'@ou',
-	program:'@program',
-	ouMode:'@ouMode',
-	programStatus:'@programStatus',
-	eventStartDate:'@eventStartDate',
-	eventEndDate:'@eventEndDate',
-	eventStatus:'@eventStatus'},
-  { get: { method: "GET"},
-	post: { method: "POST"},
-	remove: {method:'DELETE'}
-  });
-}]);
 Dhis2Api.factory("TrackerEvent",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"events", 
 	{orgUnit:'@orgUnit',
 	programStage:'@programStage'
 	},
-  { get: { method: "GET"},
-	post: { method: "POST"},
-	remove: {method:'DELETE'}
-  });
-}]);
-Dhis2Api.factory("SaveDataEvent",['$resource','commonvariable', function ($resource,commonvariable) {
-	return $resource( commonvariable.url+"events/:uid", 
-	null,
-  { update: { method: "PUT"}
+  { get: { method: "GET"}
   });
 }]);
