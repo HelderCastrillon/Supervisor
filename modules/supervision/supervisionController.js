@@ -1,6 +1,8 @@
 appContractSDSC.controller('supervisionController', ["$scope",'$filter',"commonvariable", "$modal",'Credential','Supervisors','TrackerEvent', function($scope, $filter,commonvariable,$modal,Credential,Supervisors,TrackerEvent) {
 
 $scope.loadevent=function(){
+	$scope.contractAsigned=[];
+	var k=0;
 	TrackerEvent.get({
 	orgUnit:commonvariable.OrganisationUnit,
 	programStage:commonvariable.programStageSupervision}
@@ -9,9 +11,8 @@ $scope.loadevent=function(){
 		angular.forEach($scope.ListContract, function(contract,keycontract){
 			angular.forEach(contract.dataValues, function(deContract,deKey){
 				angular.forEach(commonvariable.DataelementSupervision, function(dataElementSup,key){
-					
 					if(deContract.dataElement==dataElementSup.supervisor && $scope.supervisor.id==deContract.value){
-						$scope.contractAsigned=contract;
+						$scope.contractAsigned[k++]=contract;
 					}
 				});
 			});
