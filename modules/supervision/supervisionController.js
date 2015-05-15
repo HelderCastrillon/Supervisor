@@ -5,7 +5,17 @@ $scope.loadevent=function(){
 	orgUnit:commonvariable.OrganisationUnit,
 	programStage:commonvariable.programStageSupervision}
 	).$promise.then(function(data){
-		console.log(data);
+		$scope.ListContract=data.events;
+		angular.forEach($scope.ListContract, function(contract,keycontract){
+			angular.forEach(contract.dataValues, function(deContract,deKey){
+				angular.forEach(commonvariable.DataelementSupervision, function(dataElementSup,key){
+					
+					if(deContract.dataElement==dataElementSup.supervisor && $scope.supervisor.id==deContract.value){
+						$scope.contractAsigned=contract;
+					}
+				});
+			});
+		});
 		//Contratos Actuales si estado = ACTIVE
 		//por liquidar si esta activo y la fecha final del contrato es menor de la fecha actual
 		//Contratos supervisados si estado != ACTIVE
@@ -28,6 +38,7 @@ Supervisors.get()
 					$scope.supervisor={name:'Usted No es Supervisor', id:''};
 				}
 });
+
 
 }]);
 
