@@ -17,27 +17,27 @@
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-success">
-    <div class="panel-heading" role="tab" id="headingOne">
+    <div class="panel-heading" role="tab" id="headingZero">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseZero" aria-expanded="true" aria-controls="collapseZero">
           Contratos actuales<span class="badge">5</span>
         </a>
       </h4>
     </div>
-    <div id="collapseZero" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+    <div id="collapseZero" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingZero">
       <div class="panel-body">
           <table class="table table-hover">
             <tr>
+              <th>Contratista</th>
               <th>Contrato</th>
-              <th>Valor</th>
               <th>fecha</th>
               <th>descargar</th>
             </tr>
             <tr ng-repeat="ct in contractAsigned">
-              <td>{{ct[1]}}</td>
-              <td>{{ct[2]}}</td>
-              <td>{{ct[3]}}</td>
-              <td>{{ct[4]}}</td>
+              <td>{{ct[8]}}</td>
+              <td>{{ct.nContrato}}</td>
+              <td>{{ct.fContrato}}</td>
+              <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
             </tr>
           </table>
       </div>
@@ -84,7 +84,7 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-info">
+  <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseThree" aria-expanded="false" aria-controls="collapseThree">
