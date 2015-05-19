@@ -5,6 +5,7 @@ $scope.Currentcontract=[];
 $scope.NextContract=[];
 $scope.EndContract=[];
 $scope.OtherContract=[];
+$scope.NumContract=[];
 
 
 Credential.get()
@@ -60,20 +61,20 @@ $scope.finddatacontract=function(entity){
 			if(fActual.getFullYear()==fechaContrato[0]){ 
 				if(((fActual.getMonth()*1)+1)>(fechaContrato[1]*1)){
 					$scope.Currentcontract[$scope.Currentcontract.length++]=value;
-					$scope.NumContract={'activos':$scope.contractAsigned.length};
+					$scope.NumContract['activos']=$scope.Currentcontract.length;
 				}
 				if(((fActual.getMonth()*1)+1)==(fechaContrato[1]*1)){
 					$scope.NextContract[$scope.NextContract.length++]=value;
-					$scope.NumContract={'proximos':$scope.NextContract.length};
+					$scope.NumContract['proximos']=$scope.NextContract.length;
 				}
 				if(((fActual.getMonth()*1)+1)<(fechaContrato[1]*1)){
 					$scope.EndContract[$scope.EndContract.length++]=value;
-					$scope.NumContract={'liquidar':$scope.EndContract.length};
+					$scope.NumContract['liquidar']=$scope.EndContract.length;
 				}
 			}
 			else{
-				$scope.OtherContract[$scope.EndContract.length++]=value;
-				$scope.NumContract={'otros':$scope.OtherContract.length};	
+				$scope.OtherContract[$scope.OtherContract.length++]=value;
+				$scope.NumContract['otros']=$scope.OtherContract.length;	
 
 			}
 			//Contratos Actuales si estado = ACTIVE
