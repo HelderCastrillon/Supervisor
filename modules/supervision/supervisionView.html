@@ -20,7 +20,7 @@
     <div class="panel-heading" role="tab" id="headingZero">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseZero" aria-expanded="true" aria-controls="collapseZero">
-          Contratos actuales<span class="badge">5</span>
+          Contratos actuales<span class="badge">{{NumContract.activos}}</span>
         </a>
       </h4>
     </div>
@@ -31,13 +31,16 @@
               <th>Contratista</th>
               <th>Contrato</th>
               <th>fecha</th>
-              <th>descargar</th>
+              <th>Ver Contrato</th>
+              <th>Detalles</th>
+
             </tr>
-            <tr ng-repeat="ct in contractAsigned">
+            <tr ng-repeat="ct in CurrentContract">
               <td>{{ct[8]}}</td>
               <td>{{ct.nContrato}}</td>
               <td>{{ct.fContrato}}</td>
               <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
+              <td><button class="btn btn-default" type="submit">Ver detalle</button></td>
             </tr>
           </table>
       </div>
@@ -47,7 +50,7 @@
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          proximos a vencer<span class="badge">5</span>
+          proximos a vencer<span class="badge">{{NumContract.proximos}}</span>
         </a>
       </h4>
     </div>
@@ -55,16 +58,19 @@
       <div class="panel-body">
           <table class="table table-hover">
             <tr>
+              <th>Contratista</th>
               <th>Contrato</th>
-              <th>Valor</th>
               <th>fecha</th>
-              <th>descargar</th>
+              <th>Ver Contrato</th>
+              <th>Detalles</th>
+
             </tr>
-            <tr ng-repeat="ct in contractAsigned">
-              <td>{{ct[1]}}</td>
-              <td>{{ct[2]}}</td>
-              <td>{{ct[3]}}</td>
-              <td>{{ct[4]}}</td>
+            <tr ng-repeat="ct in NextContract">
+              <td>{{ct[8]}}</td>
+              <td>{{ct.nContrato}}</td>
+              <td>{{ct.fContrato}}</td>
+              <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
+              <td><button class="btn btn-default" type="submit">Ver detalle</button></td>
             </tr>
           </table>
       </div>
@@ -74,28 +80,60 @@
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-         Pendientes por liquidar <span class="badge">2</span>
+         Pendientes por liquidar <span class="badge">{{NumContract.liquidar}}</span>
         </a>
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
+       <table class="table table-hover">
+            <tr>
+              <th>Contratista</th>
+              <th>Contrato</th>
+              <th>fecha</th>
+              <th>Ver Contrato</th>
+              <th>Detalles</th>
+
+            </tr>
+            <tr ng-repeat="ct in EndContract">
+              <td>{{ct[8]}}</td>
+              <td>{{ct.nContrato}}</td>
+              <td>{{ct.fContrato}}</td>
+              <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
+              <td><button class="btn btn-default" type="submit">Ver detalle</button></td>
+            </tr>
+          </table>
+        </div>
     </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          contratos supervisados <span class="badge">20</span>
+          contratos supervisados <span class="badge">{{NumContract.otros}}</span>
         </a>
       </h4>
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
+       <table class="table table-hover">
+            <tr>
+              <th>Contratista</th>
+              <th>Contrato</th>
+              <th>fecha</th>
+              <th>Ver Contrato</th>
+              <th>Detalles</th>
+
+            </tr>
+            <tr ng-repeat="ct in OtherContract">
+              <td>{{ct[8]}}</td>
+              <td>{{ct.nContrato}}</td>
+              <td>{{ct.fContrato}}</td>
+              <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
+              <td><button class="btn btn-default" type="submit">Ver detalle</button></td>
+            </tr>
+          </table>
+        </div>
     </div>
   </div>
 </div>

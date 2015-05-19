@@ -1,5 +1,12 @@
 appContractSDSC.controller('supervisionController', ["$scope",'$filter',"commonvariable", "$modal",'Credential','Supervisors','TrackerEvent','TrackerEntityinProgram', function($scope, $filter,commonvariable,$modal,Credential,Supervisors,TrackerEvent,TrackerEntityinProgram) {
 
+//ListContract
+$scope.Currentcontract=[];
+$scope.NextContract=[];
+$scope.EndContract=[];
+$scope.OtherContract=[];
+
+
 Credential.get()
 .$promise.then(function(data){
 	$scope.UserId=data.userCredentials.openId;
@@ -21,7 +28,6 @@ Supervisors.get()
 ///find 
 
 $scope.loadevent=function(){
-	$scope.contractAsigned=[];
 	TrackerEvent.get({
 	orgUnit:commonvariable.OrganisationUnit,
 	programStage:commonvariable.programStageSupervision}
@@ -48,12 +54,31 @@ $scope.finddatacontract=function(entity){
 	angular.forEach($scope.Entities.rows, function(value,key){
 		if(value[0]==entity){
 			value["rCompleta"]=commonvariable.urldownload+"/"+commonvariable.folder+"/"+value.rContrato;
-			$scope.contractAsigned[$scope.contractAsigned.length++]=value;
+			var fechaContrato=value.fContrato.split("-");
+			var fActual=new Date();
+			
+			if(fActual.getFullYear()==fechaContrato[0]){ 
+				if(((fActual.getMonth()*1)+1)>(fechaContrato[1]*1)){
+					$scope.Currentcontract[$scope.Currentcontract.length++]=value;
+					$scope.NumContract={'activos':$scope.contractAsigned.length};
+				}
+				if(((fActual.getMonth()*1)+1)==(fechaContrato[1]*1)){
+					$scope.NextContract[$scope.NextContract.length++]=value;
+					$scope.NumContract={'proximos':$scope.NextContract.length};
+				}
+				if(((fActual.getMonth()*1)+1)<(fechaContrato[1]*1)){
+					$scope.EndContract[$scope.EndContract.length++]=value;
+					$scope.NumContract={'liquidar':$scope.EndContract.length};
+				}
+			}
+			else{
+				$scope.OtherContract[$scope.EndContract.length++]=value;
+				$scope.NumContract={'otros':$scope.OtherContract.length};	
 
+			}
 			//Contratos Actuales si estado = ACTIVE
 			//por liquidar si esta activo y la fecha final del contrato es menor de la fecha actual
 			//Contratos supervisados si estado != ACTIVE
-
 		}
 	});
 }
