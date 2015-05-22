@@ -34,12 +34,12 @@ $scope.loadevent=function(){
 	programStage:commonvariable.programStageSupervision}
 	).$promise.then(function(data){
 		$scope.ListContract=data.events;
-		angular.forEach($scope.ListContract, function(contract,keycontract){
-			angular.forEach(contract.dataValues, function(deContract,deKey){
-				angular.forEach(commonvariable.DataelementSupervision, function(dataElementSup,key){
+		angular.forEach($scope.ListContract, function(contract,keycontract){ //list register
+			var kcontract=0;
+			angular.forEach(contract.dataValues, function(deContract,deKey){//data value
+				angular.forEach(commonvariable.DataelementSupervision, function(dataElementSup,key){ //dataelement
 					if(deContract.dataElement==dataElementSup.supervisor && $scope.supervisor.id==deContract.value){
-						$scope.finddatacontract(contract.trackedEntityInstance);
-						
+						$scope.finddatacontract(contract.trackedEntityInstance,kcontract++,1);												
 					}
 				});
 			});
@@ -51,14 +51,14 @@ $scope.loadevent=function(){
 
 ////complete data for contrate
 
-$scope.finddatacontract=function(entity){
+$scope.finddatacontract=function(entity,k,p){
 	angular.forEach($scope.Entities.rows, function(value,key){
 		if(value[0]==entity){
 			value["rCompleta"]=commonvariable.urldownload+"/"+commonvariable.folder+"/"+value.rContrato;
 			var fechaContrato=value.fContrato.split("-");
 			var fActual=new Date();
-			
-			if(fActual.getFullYear()==fechaContrato[0]){ 
+			$scope.previusValue=value;
+			if(k!=0){ 
 				if(((fActual.getMonth()*1)+1)>(fechaContrato[1]*1)){
 					$scope.Currentcontract[$scope.Currentcontract.length++]=value;
 					$scope.NumContract['activos']=$scope.Currentcontract.length;
