@@ -6,7 +6,9 @@ $scope.NextContract=[];
 $scope.EndContract=[];
 $scope.OtherContract=[];
 $scope.NumContract=[];
-
+$scope.RestContract=[];
+$scope.previus={};
+$scope.contcontratos=0;
 
 Credential.get()
 .$promise.then(function(data){
@@ -34,12 +36,14 @@ $scope.loadevent=function(){
 	programStage:commonvariable.programStageSupervision}
 	).$promise.then(function(data){
 		$scope.ListContract=data.events;
+		var kcontract=0;
 		angular.forEach($scope.ListContract, function(contract,keycontract){ //list register
-			var kcontract=0;
+			kcontract++;
 			angular.forEach(contract.dataValues, function(deContract,deKey){//data value
 				angular.forEach(commonvariable.DataelementSupervision, function(dataElementSup,key){ //dataelement
-					if(deContract.dataElement==dataElementSup.supervisor && $scope.supervisor.id==deContract.value){
-						$scope.finddatacontract(contract.trackedEntityInstance,kcontract++,1);												
+					//&& $scope.supervisor.id==deContract.value
+					if(deContract.dataElement==dataElementSup.supervisor){
+						$scope.finddatacontract(contract.trackedEntityInstance,$scope.supervisor.id,deContract.value,$scope.ListContract.length,kcontract,1);												
 					}
 				});
 			});
@@ -51,36 +55,37 @@ $scope.loadevent=function(){
 
 ////complete data for contrate
 
-$scope.finddatacontract=function(entity,k,p){
+$scope.finddatacontract=function(entity,login,supervisorContract,total,contador,p){
 	angular.forEach($scope.Entities.rows, function(value,key){
+		
 		if(value[0]==entity){
 			value["rCompleta"]=commonvariable.urldownload+"/"+commonvariable.folder+"/"+value.rContrato;
-			var fechaContrato=value.fContrato.split("-");
-			var fActual=new Date();
-			$scope.previusValue=value;
-			if(k!=0){ 
-				if(((fActual.getMonth()*1)+1)>(fechaContrato[1]*1)){
-					$scope.Currentcontract[$scope.Currentcontract.length++]=value;
+			value["Supervidor"]=supervisorContract;
+			console.log((login==supervisorContract?"SI":"NO")+($scope.previus.entity==entity?" EntitiySi":" EntitiyNo")+ ($scope.previus.supervisor==login?" SupSI":" SupNO") + " Login "+login+",Supervisor "+supervisorContract+", Entidad "+value[10]);
+			if($scope.previus.supervisor==login){		
+				if($scope.previus.entity!=entity){
+					$scope.Currentcontract[$scope.Currentcontract.length++]=$scope.previus.value;
 					$scope.NumContract['activos']=$scope.Currentcontract.length;
 				}
-				if(((fActual.getMonth()*1)+1)==(fechaContrato[1]*1)){
-					$scope.NextContract[$scope.NextContract.length++]=value;
-					$scope.NumContract['proximos']=$scope.NextContract.length;
-				}
-				if(((fActual.getMonth()*1)+1)<(fechaContrato[1]*1)){
-					$scope.EndContract[$scope.EndContract.length++]=value;
-					$scope.NumContract['liquidar']=$scope.EndContract.length;
-				}
+				else{
+					$scope.OtherContract[$scope.OtherContract.length++]=value;
+					$scope.NumContract['otros']=$scope.OtherContract.length;	
+				}			
 			}
-			else{
-				$scope.OtherContract[$scope.OtherContract.length++]=value;
-				$scope.NumContract['otros']=$scope.OtherContract.length;	
-
+			if(login!=supervisorContract){
+				Othercontract={
+					"numeración":$scope.contcontratos++,
+					"Contratista":value[10],
+					"Supervisor":supervisorContract,
+					"nContrato":value.nContrato,
+					"fContrato":value.fContrato,
+					"rContrato":value.rContrato};
+			
+				$scope.RestContract[$scope.RestContract.length++]=Othercontract;
+				$scope.NumContract['resto']=$scope.RestContract.length;
 			}
-			//Contratos Actuales si estado = ACTIVE
-			//por liquidar si esta activo y la fecha final del contrato es menor de la fecha actual
-			//Contratos supervisados si estado != ACTIVE
-		}
+			$scope.previus={"entity":entity,"supervisor":supervisorContract,"value":value};
+		}		
 	});
 }
 ///copy from filing

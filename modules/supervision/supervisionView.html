@@ -16,6 +16,7 @@
 <div class="col-md-11">
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
   <div class="panel panel-success">
     <div class="panel-heading" role="tab" id="headingZero">
       <h4 class="panel-title">
@@ -46,6 +47,8 @@
       </div>
     </div>
   </div>
+
+
   <div class="panel panel-warning">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
@@ -76,6 +79,9 @@
       </div>
     </div>
   </div>
+
+
+
   <div class="panel panel-danger">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
@@ -86,7 +92,7 @@
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
-       <table class="table table-hover">
+        <table class="table table-hover">
             <tr>
               <th>Contratista</th>
               <th>Contrato</th>
@@ -102,7 +108,7 @@
               <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
               <td><button class="btn btn-default" type="submit">Ver detalle</button></td>
             </tr>
-          </table>
+         </table>
         </div>
     </div>
   </div>
@@ -116,7 +122,7 @@
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
-       <table class="table table-hover">
+        <table class="table table-hover">
             <tr>
               <th>Contratista</th>
               <th>Contrato</th>
@@ -136,11 +142,43 @@
         </div>
     </div>
   </div>
-</div>
 
+    <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Otros Contratos <span class="badge">{{NumContract.resto}}</span>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+        <table class="table table-hover">
+            <tr>
+              <th>#</th>
+              <th>Contratista</th>
+              <th>Supervisor</th>
+              <th>Contrato</th>
+              <th>fecha</th>
+              <th>Ver Contrato</th>
+              <th>Detalles</th>
+
+            </tr>
+            <tr ng-repeat="ct in RestContract">
+              <td>{{ct.numeracion}}</td>
+              <td>{{ct.Contratista}}</td>
+              <th>{{ct.Supervisor}}</th>
+              <td>{{ct.nContrato}}</td>
+              <td>{{ct.fContrato}}</td>
+              <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
+              <td><button class="btn btn-default" type="submit">Ver detalle</button></td>
+            </tr>
+          </table>
+        </div>
+    </div>
+  </div>
+</div>
 </div>
 <div class="col-md-11">
-
 </div>
-
 </div>

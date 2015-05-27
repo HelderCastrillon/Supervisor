@@ -28,6 +28,8 @@ Dhis2Api.factory("commonvariable", function () {
 			Program:"kmwWsj13wN0",
 			programStage:"rQFeRuU0y2T",
 			programStageSupervision:"bvCkspOICM2",
+			dataElemntfinContrato:"",
+			dataElementOtrosi:"",
 			StartDate:'2015-01-01',
 			EndDate:dtformated,
 			DataelementSupervision:[{"supervisor":"bdyUU11MQBn"},
