@@ -17,16 +17,16 @@
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-  <div class="panel panel-success">
-    <div class="panel-heading" role="tab" id="headingZero">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseZero" aria-expanded="true" aria-controls="collapseZero">
-          Contratos actuales<span class="badge">{{NumContract.activos}}</span>
-        </a>
-      </h4>
-    </div>
-    <div id="collapseZero" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingZero">
-      <div class="panel-body">
+   <div class="panel panel-success">
+      <div class="panel-heading" role="tab" id="headingFive">
+        <h4 class="panel-title">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+            Activos <span class="badge">{{NumContract.activos}}</span>
+          </a>
+        </h4>
+      </div>
+      <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+        <div class="panel-body">
           <table class="table table-hover">
             <tr>
               <th>Contratista</th>
@@ -36,23 +36,22 @@
               <th>Detalles</th>
 
             </tr>
-            <tr ng-repeat="ct in Currentcontract">
-              <td>{{ct[10]}}</td>
-              <td>{{ct.nContrato}}</td>
-              <td>{{ct.fContrato}}</td>
-              <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
-              <td><button class="btn btn-default" type="submit">Ver detalle</button></td>
-            </tr>
-          </table>
+              <tr ng-repeat="ct in Currentcontract">
+                <td>{{ct[10]}}</td>
+                <td>{{ct.nContrato}}</td>
+                <td>{{ct.fContrato}}</td>
+                <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
+                <td><button class="btn btn-default" type="submit">Ver detalle</button></td>
+              </tr>
+            </table>
+          </div>
       </div>
     </div>
-  </div>
 
-
-  <div class="panel panel-warning">
+   <div class="panel panel-warning">
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <a data-toggle="collapse" data-parent="#accordion" href="#supervision#collapseOne" aria-expanded="false" aria-controls="collapseOne">
           proximos a vencer<span class="badge">{{NumContract.proximos}}</span>
         </a>
       </h4>
@@ -177,6 +176,8 @@
         </div>
     </div>
   </div>
+
+  
 </div>
 </div>
 <div class="col-md-11">

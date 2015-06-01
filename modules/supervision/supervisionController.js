@@ -42,8 +42,12 @@ $scope.loadevent=function(){
 			angular.forEach(contract.dataValues, function(deContract,deKey){//data value
 				angular.forEach(commonvariable.DataelementSupervision, function(dataElementSup,key){ //dataelement
 					//&& $scope.supervisor.id==deContract.value
+					if(deContract.dataElement==commonvariable.dataElemntfinContrato){
+						$scope.finContrato=deContract.value;
+					}
 					if(deContract.dataElement==dataElementSup.supervisor){
-						$scope.finddatacontract(contract.trackedEntityInstance,$scope.supervisor.id,deContract.value,$scope.ListContract.length,kcontract,1);												
+					$scope.finddatacontract(contract.trackedEntityInstance,$scope.supervisor.id,deContract.value,$scope.ListContract.length,$scope.finContrato,1);
+					$scope.finContrato="";												
 					}
 				});
 			});
@@ -55,17 +59,45 @@ $scope.loadevent=function(){
 
 ////complete data for contrate
 
-$scope.finddatacontract=function(entity,login,supervisorContract,total,contador,p){
+$scope.finddatacontract=function(entity,login,supervisorContract,total,fechaFinal,p){
 	angular.forEach($scope.Entities.rows, function(value,key){
 		
 		if(value[0]==entity){
 			value["rCompleta"]=commonvariable.urldownload+"/"+commonvariable.folder+"/"+value.rContrato;
 			value["Supervidor"]=supervisorContract;
-			console.log((login==supervisorContract?"SI":"NO")+($scope.previus.entity==entity?" EntitiySi":" EntitiyNo")+ ($scope.previus.supervisor==login?" SupSI":" SupNO") + " Login "+login+",Supervisor "+supervisorContract+", Entidad "+value[10]);
+			//console.log((login==supervisorContract?"SI":"NO")+($scope.previus.entity==entity?" EntitiySi":" EntitiyNo")+ ($scope.previus.supervisor==login?" SupSI":" SupNO") + " Login "+login+",Supervisor "+supervisorContract+", Entidad "+value[10]);
 			if($scope.previus.supervisor==login){		
-				if($scope.previus.entity!=entity){
-					$scope.Currentcontract[$scope.Currentcontract.length++]=$scope.previus.value;
-					$scope.NumContract['activos']=$scope.Currentcontract.length;
+				if($scope.previus.entity!=entity){					
+					ms = Date.parse(fechaFinal);
+					
+					fFincontrato = new Date(ms).getTime();
+					
+					fActual=new Date();
+					fActualm=new Date().getTime();
+				    fday=fActual.getDate();
+				    fmonth=fActual.getMonth()+1;
+				    fyear=fActual.getFullYear();
+				    var txtFecha=((fmonth==12)?fyear+1:fyear)+"-"+((fmonth==12)?1:fmonth+1)+"-"+fday;
+				    fControl=new Date(txtFecha).getTime();
+				    
+				    console.log(fActualm);
+				    console.log(fControl);
+					console.log(fFincontrato);
+					console.log(txtFecha);
+					if(fControl<=fFincontrato){
+						$scope.Currentcontract[$scope.Currentcontract.length++]=$scope.previus.value;
+						$scope.NumContract['activos']=$scope.Currentcontract.length;		
+					}
+					else if(fActualm<=fFincontrato){
+							$scope.NextContract[$scope.NextContract.length++]=$scope.previus.value;
+							$scope.NumContract['proximos']=$scope.NextContract.length;		
+					}
+					else{
+						$scope.EndContract[$scope.EndContract.length++]=$scope.previus.value;
+						$scope.NumContract['liquidar']=$scope.EndContract.length;		
+					}						
+								
+					
 				}
 				else{
 					$scope.OtherContract[$scope.OtherContract.length++]=value;
