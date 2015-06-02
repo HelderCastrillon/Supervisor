@@ -1,4 +1,4 @@
-appContractSDSC.controller('supervisionController', ["$scope",'$filter',"commonvariable", "$modal",'Credential','Supervisors','TrackerEvent','TrackerEntityinProgram', function($scope, $filter,commonvariable,$modal,Credential,Supervisors,TrackerEvent,TrackerEntityinProgram) {
+appContractSDSC.controller('supervisionController', ["$scope",'$filter',"commonvariable", "$modal",'Credential','Supervisors','TrackerEvent','TrackerEntityinProgram','$log', function($scope, $filter,commonvariable,$modal,Credential,Supervisors,TrackerEvent,TrackerEntityinProgram,$log) {
 
 //ListContract
 $scope.Currentcontract=[];
@@ -175,9 +175,55 @@ $scope.loadlistentities=function(nextpage){
 	$scope.loadevent();	
 	}
 
-	
+
+
+///Modal
+
+ $scope.animationsEnabled = true;
+
+  $scope.openAditionalInfo = function (info) {
+
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'ModalContentSupervisor.html',
+      controller: 'ModalInstanceCtrlSupervision',
+      resolve: {
+        infoSupervisor: function () {
+          return info;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $scope.toggleAnimation = function () {
+    $scope.animationsEnabled = !$scope.animationsEnabled;
+  };
+
+  /////end modal
 
 
 }]);
+
+appContractSDSC.controller('ModalInstanceCtrlSupervision', function ($scope, $modalInstance, infoSupervisor) {
+
+  $scope.info = infoSupervisor;
+  $scope.selected = {
+    item: 1
+  };
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});
 
 
