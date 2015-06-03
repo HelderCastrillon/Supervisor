@@ -182,6 +182,20 @@ $scope.loadlistentities=function(nextpage){
  $scope.animationsEnabled = true;
 
   $scope.openAditionalInfo = function (info) {
+  	var dinfo={
+  		trackedEntityInstance:info,
+  		orgUnit:commonvariable.OrganisationUnit,
+  		program:commonvariable.Program
+  	};
+
+  	TrackerEvent.get({
+			trackedEntityInstance:info,
+  			orgUnit:commonvariable.OrganisationUnit,
+  			program:commonvariable.Program,
+  			paging:false
+		}).$promise.then(function(data){
+			$scope.trackerValues=data;
+		 });
 
     var modalInstance = $modal.open({
       animation: $scope.animationsEnabled,
@@ -189,7 +203,7 @@ $scope.loadlistentities=function(nextpage){
       controller: 'ModalInstanceCtrlSupervision',
       resolve: {
         infoSupervisor: function () {
-          return info;
+          return $scope.trackerValues;
         }
       }
     });
