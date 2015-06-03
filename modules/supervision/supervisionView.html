@@ -188,18 +188,26 @@
 
     <script type="text/ng-template" id="ModalContentSupervisor.html">
         <div class="modal-header">
-            <h3 class="modal-title">I am a modal!</h3>
+            <h3 class="modal-title">Detalles del Contrato</h3>
         </div>
         <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in info">
-                    <a ng-click="selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
+        <tabset>
+          <tab ng-repeat="tab in info" heading="{{tab.title}}">
+            <table class="table table-hover">
+              <tr>
+                <th>Atributo</th>
+                <th>Valor</th>
+              </tr>
+              <tr ng-repeat="dt in tab.datavalues">
+                <th>{{dt.title}}</th>
+                <td>{{dt.value}}</td>
+
+              </tr>
+          </table> 
+          </tab>    
+        </tabset>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>

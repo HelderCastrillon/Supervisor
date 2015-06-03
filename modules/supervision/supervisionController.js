@@ -195,25 +195,28 @@ $scope.loadlistentities=function(nextpage){
   			paging:false
 		}).$promise.then(function(data){
 			$scope.trackerValues=data;
-		 });
 
-    var modalInstance = $modal.open({
-      animation: $scope.animationsEnabled,
-      templateUrl: 'ModalContentSupervisor.html',
-      controller: 'ModalInstanceCtrlSupervision',
-      resolve: {
-        infoSupervisor: function () {
-          return $scope.trackerValues;
-        }
-      }
-    });
+			var modalInstance = $modal.open({
+		      animation: $scope.animationsEnabled,
+		      templateUrl: 'ModalContentSupervisor.html',
+		      controller: 'ModalInstanceCtrlSupervision',
+		      resolve: {
+		        infoSupervisor: function () {
+		          return $scope.trackerValues;
+		        }
+		      }
+		    });
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
+		     modalInstance.result.then(function (selectedItem) {
+			      $scope.selected = selectedItem;
+			    }, function () {
+			      $log.info('Modal dismissed at: ' + new Date());
+			    });
+			 });
+
+	 };
+
+   
 
   $scope.toggleAnimation = function () {
     $scope.animationsEnabled = !$scope.animationsEnabled;
@@ -224,9 +227,21 @@ $scope.loadlistentities=function(nextpage){
 
 }]);
 
-appContractSDSC.controller('ModalInstanceCtrlSupervision', function ($scope, $modalInstance, infoSupervisor) {
+appContractSDSC.controller('ModalInstanceCtrlSupervision', function ($scope, $modalInstance, infoSupervisor,commonvariable) {
 
-  $scope.info = infoSupervisor;
+  $scope.info=[];
+  angular.forEach(infoSupervisor.events, function(eValue, eKey) {
+  	console.log(eValue.programStage);
+  	console.log(commonvariable.titleStage);
+  	$scope.info.push({"title":commonvariable.titleStage[eValue.programStage],"uid":eValue.programStage,"datavalues":[]});
+  	angular.forEach(eValue.dataValues, function(vValue, vKey) {
+  		angular.forEach(infoSupervisor.metaData.de, function(mValue, mKey) {
+  			if(vValue.dataElement==mKey)
+  				$scope.info[$scope.info.length-1].datavalues.push({"title":mValue,"value":vValue.value});	  	
+  		});
+  	});  	
+  });
+
   $scope.selected = {
     item: 1
   };
