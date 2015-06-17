@@ -37,11 +37,11 @@
 
             </tr>
               <tr ng-repeat="ct in Currentcontract">
-                <td>{{ct[10]}}</td>
+                <td>{{ct.contratista}}</td>
                 <td>{{ct.nContrato}}</td>
                 <td>{{ct.fContrato}}</td>
                 <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
-                <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct[0])">Ver detalle</button></td>
+                <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct.event)">Ver detalle</button></td>
               </tr>
             </table>
           </div>
@@ -68,11 +68,11 @@
 
             </tr>
             <tr ng-repeat="ct in NextContract">
-              <td>{{ct[10]}}</td>
+              <td>{{ct.contratista}}</td>
               <td>{{ct.nContrato}}</td>
               <td>{{ct.fContrato}}</td>
               <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
-              <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct[0])">Ver detalle</button></td>
+              <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct.event)">Ver detalle</button></td>
             </tr>
           </table>
       </div>
@@ -101,11 +101,11 @@
 
             </tr>
             <tr ng-repeat="ct in EndContract">
-              <td>{{ct[10]}}</td>
+              <td>{{ct.contratista}}</td>
               <td>{{ct.nContrato}}</td>
               <td>{{ct.fContrato}}</td>
               <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
-              <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct)">Ver detalle</button></td>
+              <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct.event)">Ver detalle</button></td>
             </tr>
          </table>
         </div>
@@ -131,11 +131,11 @@
 
             </tr>
             <tr ng-repeat="ct in OtherContract">
-              <td>{{ct[10]}}</td>
+              <td>{{ct.contratista}}</td>
               <td>{{ct.nContrato}}</td>
               <td>{{ct.fContrato}}</td>
               <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
-              <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct)">Ver detalle</button></td>
+              <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct.event)">Ver detalle</button></td>
             </tr>
           </table>
         </div>
@@ -154,7 +154,6 @@
       <div class="panel-body">
         <table class="table table-hover">
             <tr>
-              <th>#</th>
               <th>Contratista</th>
               <th>Supervisor</th>
               <th>Contrato</th>
@@ -163,14 +162,13 @@
               <th>Detalles</th>
 
             </tr>
-            <tr ng-repeat="ct in RestContract">
-              <td>{{ct.numeracion}}</td>
-              <td>{{ct.Contratista}}</td>
-              <th>{{ct.Supervisor}}</th>
-              <td>{{ct.nContrato}}</td>
-              <td>{{ct.fContrato}}</td>
-              <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
-              <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct[0])">Ver detalle</button></td>
+            <tr ng-repeat="ctr in RestContract track by $index">
+              <td>{{ctr.contratista}}</td>
+              <th>{{ctr.Supervisor}}</th>
+              <td>{{ctr.nContrato}}</td>
+              <td>{{ctr.fContrato}}</td>
+              <td><a  target="_blank" href="{{ct.rCompleta}}">{{ctr.rContrato}}</a></td>
+              <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ctr.event)">Ver detalle</button></td>
             </tr>
           </table>
         </div>
