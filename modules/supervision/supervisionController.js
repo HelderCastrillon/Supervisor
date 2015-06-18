@@ -271,8 +271,15 @@ appContractSDSC.controller('ModalInstanceCtrlSupervision', function ($scope, $mo
   	$scope.info.push({"title":commonvariable.titleStage[eValue.programStage],"uid":eValue.programStage,"datavalues":[]});
   	angular.forEach(eValue.dataValues, function(vValue, vKey) {
   		angular.forEach(infoSupervisor.metaData.de, function(mValue, mKey) {
-  			if(vValue.dataElement==mKey)
-  				$scope.info[$scope.info.length-1].datavalues.push({"title":mValue,"value":vValue.value});	  	
+  			if(vValue.dataElement==mKey){
+  				if (mValue.indexOf('Ruta')!=-1) {
+  					var rValue=commonvariable.urldownload+"/"+commonvariable.folder+"/"+vValue.value;
+  					$scope.info[$scope.info.length-1].datavalues.push({"title":mValue,"value":rValue,"url":true});
+  				}
+  				else{
+  					$scope.info[$scope.info.length-1].datavalues.push({"title":mValue,"value":vValue.value,"url":false});	  	
+  				}
+  			}
   		});
   	});  	
   });
