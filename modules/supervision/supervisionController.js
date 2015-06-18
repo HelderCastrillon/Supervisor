@@ -9,10 +9,16 @@ $scope.NumContract=[];
 $scope.RestContract=[];
 $scope.previus={};
 $scope.contcontratos=0;
-
+$scope.supersupervisor=false;
 Credential.get()
 .$promise.then(function(data){
 	$scope.UserId=data.userCredentials.openId;
+	$scope.Roles=data.userCredentials.userRoles;
+	angular.forEach($scope.Roles,function(value,key){
+		if(value.id==commonvariable.supersupervisor){
+			$scope.supersupervisor=true;
+		}
+	});
 });
 //list all supervisor for search if the current user is a supervisor
 Supervisors.get()

@@ -18,11 +18,12 @@ Dhis2Api.factory("commonvariable", function () {
 	};
 	 today();
 	var Vari={
-			url:"http://localhost:8080/dhis/api/",
-			urlbase:"http://localhost:8080/dhis/",
-			urldownload:"http://localhost:8080/externalfiledhis/",
-			urlupload:"../../../upload/uploadFile",
+			url:"http://190.146.87.62/dhis/api/",
+            urlbase:"http://190.146.87.62/dhis/",
+            urldownload:"http://190.146.87.62/externalfiledhis/",
+            urlupload:"../../../upload/upload.php",
 			folder:"Contratos",
+			supersupervisor:"tvjWDzNXSPs",
 			OrganisationUnit:"z37AIsY28kM",
 			TypeEntity:"WkBTuQkUtRM",
 			Program:"kmwWsj13wN0",
@@ -58,7 +59,7 @@ Dhis2Api.factory("userAuthorization", ['$resource','commonvariable',function($re
 }]);
 Dhis2Api.factory("Credential",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"me", 
-	{fields:'userCredentials[name,code,openId]'},
+	{fields:'userCredentials[name,code,openId,userRoles]'},
   { get: { method: "GET"}
   });
 }]);
