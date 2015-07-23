@@ -23,7 +23,7 @@ Dhis2Api.factory("commonvariable", function () {
             urldownload:"http://190.146.87.62/externalfiledhis/",
             urlupload:"../../../upload/upload.php",
 			folder:"Contratos",
-			supersupervisor:"tvjWDzNXSPs",
+			supersupervisor:"LrKRB4i4jEt",
 			OrganisationUnit:"z37AIsY28kM",
 			TypeEntity:"WkBTuQkUtRM",
 			Program:"kmwWsj13wN0",
