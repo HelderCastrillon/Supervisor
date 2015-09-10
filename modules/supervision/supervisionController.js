@@ -93,7 +93,8 @@ $scope.loadevent=function(){
 				//	}
 				//});
 			});
-			$scope.finddatacontract(contract.trackedEntityInstance,$scope.TodaSupervisor,$scope.finContrato);
+			if ($scope.TodaSupervisor.length>1)
+			    $scope.finddatacontract(contract.trackedEntityInstance, $scope.TodaSupervisor, $scope.finContrato);
 			$scope.finContrato="";												
 
 		});		

@@ -18,8 +18,8 @@ Dhis2Api.factory("commonvariable", function () {
 	};
 	 today();
 	var Vari={
-			url:"http://190.146.87.62/dhis/api/",
-            urlbase:"http://190.146.87.62/dhis/",
+			url:"http://localhost:8080/dhis/api/",
+            urlbase:"http://localhost:8080/dhis/",
             urldownload:"http://190.146.87.62/externalfiledhis/",
             urlupload:"../../../upload/upload.php",
 			folder:"Contratos",
@@ -81,7 +81,7 @@ Dhis2Api.factory("TrackerEvent",['$resource','commonvariable', function ($resour
 }]);
 
 Dhis2Api.factory("TrackerEntityinProgram",['$resource','commonvariable', function ($resource,commonvariable) {
-	return $resource( commonvariable.url+"trackedEntityInstances", 
+	return $resource( commonvariable.url+"trackedEntityInstances/query.json", 
 	{te:'@te',
 	ou:'@ou',
 	program:'@program',
@@ -89,7 +89,8 @@ Dhis2Api.factory("TrackerEntityinProgram",['$resource','commonvariable', functio
 	programStatus:'@programStatus',
 	eventStartDate:'@eventStartDate',
 	eventEndDate:'@eventEndDate',
-	eventStatus:'@eventStatus'},
+	eventStatus: '@eventStatus',
+	totalPages: 'true'},
   { get: { method: "GET"},
 	post: { method: "POST"},
 	remove: {method:'DELETE'}
