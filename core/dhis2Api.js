@@ -18,8 +18,8 @@ Dhis2Api.factory("commonvariable", function () {
 	};
 	 today();
 	var Vari={
-			url:"http://localhost:8080/dhis/api/",
-            urlbase:"http://localhost:8080/dhis/",
+			url:"http://190.146.87.62/dhis/api/",
+            urlbase:"http://190.146.87.62/dhis/",
             urldownload:"http://190.146.87.62/externalfiledhis/",
             urlupload:"../../../upload/upload.php",
 			folder:"Contratos",
